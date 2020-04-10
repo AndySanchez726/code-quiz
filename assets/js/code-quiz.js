@@ -41,7 +41,6 @@ var addInstructions = function() {
 }
 
 
-
 var removeInstructions = function() {
     instructionsEl.removeChild(instDivEl)
 };
