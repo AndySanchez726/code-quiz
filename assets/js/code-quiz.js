@@ -32,12 +32,12 @@ BEl.textContent = "Answer B";
 CEl.textContent = "Answer C";
 DEl.textContent = "Answer D";
 
-quizEl.appendChild(questionEl);
-quizEl.appendChild(answersEL);
-answersEL.appendChild(AEl);
-answersEL.appendChild(BEl);
-answersEL.appendChild(CEl);
-answersEL.appendChild(DEl);
+// quizEl.appendChild(questionEl);
+// quizEl.appendChild(answersEL);
+// answersEL.appendChild(AEl);
+// answersEL.appendChild(BEl);
+// answersEL.appendChild(CEl);
+// answersEL.appendChild(DEl);
 
 questionEl.setAttribute("class", "question", "id", "btnA");
 answersEL.setAttribute("class", "answers");
@@ -93,5 +93,6 @@ var removeInstructions = function() {
 startButtonEl.addEventListener("click", function() {
 startQuiz();
 quizTimer();
-removeInstructions();
-});
+removeInstructions()
+addQuestion();
+}); 
