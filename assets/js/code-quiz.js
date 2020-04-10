@@ -1,8 +1,9 @@
 var body = document.querySelector("body")
 var countdownEL = document.getElementById("countdown");
 var instructionsEl = document.getElementById("instructions-wrapper")
+var quizEl = document.getElementById("quiz-wrapper")
 
-//  Instruction page HTML
+//  Instruction section HTML
 var instDivEl = document.createElement("div");
 var instH1El = document.createElement("h1");
 var instPEl = document.createElement("p");
@@ -17,9 +18,42 @@ instDivEl.appendChild(instH1El);
 instDivEl.appendChild(instPEl);
 instDivEl.appendChild(startButtonEl);
 
+// Quiz Section HTML
+var questionEl = document.createElement("h2");
+var answersEL = document.createElement("div");
+var AEl = document.createElement("button");
+var BEl = document.createElement("button");
+var CEl = document.createElement("button");
+var DEl = document.createElement("button");
+
+questionEl.textContent = "This is a question";
+AEl.textContent = "Answer A";
+BEl.textContent = "Answer B";
+CEl.textContent = "Answer C";
+DEl.textContent = "Answer D";
+
+quizEl.appendChild(questionEl);
+quizEl.appendChild(answersEL);
+answersEL.appendChild(AEl);
+answersEL.appendChild(BEl);
+answersEL.appendChild(CEl);
+answersEL.appendChild(DEl);
+
+questionEl.setAttribute("class", "question", "id", "btnA");
+answersEL.setAttribute("class", "answers");
+AEl.className = "quiz-btn";
+AEl.id = "btnA";
+BEl.className = "quiz-btn";
+BEl.id = "btnB";
+CEl.className = "quiz-btn";
+CEl.id = "btnC";
+DEl.className = "quiz-btn";
+DEl.id = "btnD";
+
+
 
 var quizTimer = function () {
-    var timeLeft = 60
+    var timeLeft = 10
 
     var timerInterval = setInterval( function() {
         countdownEL.textContent = timeLeft
@@ -34,12 +68,23 @@ var quizTimer = function () {
 
 var startQuiz = function() {
     console.log("start button was clicked")
-}
+};
 
 var addInstructions = function() {
+    instructionsEl.appendChild(instDivEl);
+    instDivEl.appendChild(instH1El);
+    instDivEl.appendChild(instPEl);
+    instDivEl.appendChild(startButtonEl);
+};
 
-}
-
+var addQuestion = function() {
+    quizEl.appendChild(questionEl);
+    quizEl.appendChild(answersEL);
+    answersEL.appendChild(AEl);
+    answersEL.appendChild(BEl);
+    answersEL.appendChild(CEl);
+    answersEL.appendChild(DEl);
+};
 
 var removeInstructions = function() {
     instructionsEl.removeChild(instDivEl)
