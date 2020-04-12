@@ -18,6 +18,8 @@ instDivEl.appendChild(instH1El);
 instDivEl.appendChild(instPEl);
 instDivEl.appendChild(startButtonEl);
 
+
+
 // Quiz Section HTML
 var questionEl = document.createElement("h2");
 var answersEL = document.createElement("div");
@@ -26,19 +28,28 @@ var BEl = document.createElement("button");
 var CEl = document.createElement("button");
 var DEl = document.createElement("button");
 
-questionEl.textContent = "This is a question";
-AEl.textContent = "Answer A";
-BEl.textContent = "Answer B";
-CEl.textContent = "Answer C";
-DEl.textContent = "Answer D";
-
-// quizEl.appendChild(questionEl);
-// quizEl.appendChild(answersEL);
-// answersEL.appendChild(AEl);
-// answersEL.appendChild(BEl);
-// answersEL.appendChild(CEl);
-// answersEL.appendChild(DEl);
-
+// Question Array
+var quizQuestions = [
+    { question: "This is a question",
+      a: "Yes",
+      b: "No",
+      c: "Maybe",
+      d: "None",
+      correctAnswer: AEl,
+      wrongAnswer: [BEl, CEl, DEl]
+      
+    },
+    { question: "This is another question",
+      a: "No",
+      b: "None",
+      c: "Yes",
+      d: "Maybe",
+      correctAnswer: CEl,
+      wrongAnswer: [AEl, BEl, DEl]
+    }
+];
+// console.log(quizQuestions[0].wrongAnswer[0])
+// console.log(quizQuestions[0].wrongAnswer.every())
 questionEl.setAttribute("class", "question", "id", "btnA");
 answersEL.setAttribute("class", "answers");
 AEl.className = "quiz-btn";
@@ -51,14 +62,13 @@ DEl.className = "quiz-btn";
 DEl.id = "btnD";
 
 
-
 var quizTimer = function () {
-    var timeLeft = 10
+    var timeLeft = 100
 
     var timerInterval = setInterval( function() {
         countdownEL.textContent = timeLeft
         timeLeft--;
-    if (timeLeft === 0) {
+    if (timeLeft === -1) {
         alert("You have run out of time!");
         clearInterval(timerInterval);
     }
@@ -78,13 +88,34 @@ var addInstructions = function() {
 };
 
 var addQuestion = function() {
-    quizEl.appendChild(questionEl);
-    quizEl.appendChild(answersEL);
-    answersEL.appendChild(AEl);
-    answersEL.appendChild(BEl);
-    answersEL.appendChild(CEl);
-    answersEL.appendChild(DEl);
+    for( var i = 0; i < quizQuestions.length; i++) {   
+        questionEl.textContent = quizQuestions[i].question;
+        AEl.textContent = quizQuestions[i].a;
+        BEl.textContent = quizQuestions[i].b;
+        CEl.textContent = quizQuestions[i].c;
+        DEl.textContent = quizQuestions[i].d;
+        var correctBtn = quizQuestions[i].correctAnswer;
+        var wrongBtn = quizQuestions[i].wrongAnswer;
+        quizEl.appendChild(questionEl);
+        quizEl.appendChild(answersEL);
+        answersEL.appendChild(AEl);
+        answersEL.appendChild(BEl);
+        answersEL.appendChild(CEl);
+        answersEL.appendChild(DEl);
+        
+        correctBtn.addEventListener("click", function() {
+            console.log("correct");
+        })
+        for(var j = 0; j < wrongBtn.length; j++) {
+            wrongBtn[j].addEventListener("click", function() {
+                console.log("wrong")
+            })
+        }
+        // break;
+    };
+
 };
+
 
 var removeInstructions = function() {
     instructionsEl.removeChild(instDivEl)
@@ -96,3 +127,27 @@ quizTimer();
 removeInstructions()
 addQuestion();
 }); 
+
+
+
+
+
+
+
+
+        // if (true) {
+        //     correctBtn.addEventListener("click", function() {
+        //     console.log("The correct button was clicked");
+        //     quizEl.removeChild(questionEl);
+        //     quizEl.removeChild(answersEL);
+        //     });
+        // };
+
+
+        //     if (true) {
+        //         wrongBtn[j].addEventListener("click", function() {
+        //         console.log("Wrong Answer");
+        //         // alert("Incorrect.");
+        //         });
+        //     };  
+        // };
