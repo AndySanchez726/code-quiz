@@ -163,5 +163,3 @@ quizTimer();
 removeInstructions();
 addQuestion();
 }); 
-
-
