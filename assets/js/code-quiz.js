@@ -24,6 +24,8 @@ instDivEl.appendChild(startButtonEl);
 var questionEl = document.createElement("h2");
 var answersEL = document.createElement("div");
 var AEl = document.createElement("button");
+ AEl.dataset.answer = 'a'
+
 var BEl = document.createElement("button");
 var CEl = document.createElement("button");
 var DEl = document.createElement("button");
@@ -107,6 +109,9 @@ var addInstructions = function() {
 var i = 0 
 var correctBtn = null
 console.log(i)
+
+
+
 var addQuestion = function() {
     // i = i + 1
     console.log(i)
@@ -163,3 +168,7 @@ quizTimer();
 removeInstructions();
 addQuestion();
 }); 
+window.addEventListener("click", function() {
+
+})
+
