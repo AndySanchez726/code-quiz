@@ -30,16 +30,31 @@ var DEl = document.createElement("button");
 
 // Question Array
 var quizQuestions = [
-    { question: "This is a question",
+    { question: "Question 1",
       a: "Yes",
       b: "No",
       c: "Maybe",
       d: "None",
       correctAnswer: AEl,
       wrongAnswer: [BEl, CEl, DEl]
-      
     },
-    { question: "This is another question",
+    { question: "Question 2",
+      a: "No",
+      b: "None",
+      c: "Yes",
+      d: "Maybe",
+      correctAnswer: CEl,
+      wrongAnswer: [AEl, BEl, DEl]
+    },
+    { question: "Question 3",
+      a: "No",
+      b: "None",
+      c: "Yes",
+      d: "Maybe",
+      correctAnswer: CEl,
+      wrongAnswer: [AEl, BEl, DEl]
+    },
+    { question: "Question 4",
       a: "No",
       b: "None",
       c: "Yes",
@@ -62,13 +77,16 @@ DEl.className = "quiz-btn";
 DEl.id = "btnD";
 
 
+
+var timeLeft = 100
+
+
 var quizTimer = function () {
-    var timeLeft = 100
 
     var timerInterval = setInterval( function() {
         countdownEL.textContent = timeLeft
         timeLeft--;
-    if (timeLeft === -1) {
+    if (timeLeft <= -1) {
         alert("You have run out of time!");
         clearInterval(timerInterval);
     }
@@ -86,36 +104,54 @@ var addInstructions = function() {
     instDivEl.appendChild(instPEl);
     instDivEl.appendChild(startButtonEl);
 };
-
+var i = 0 
+var correctBtn = null
+console.log(i)
 var addQuestion = function() {
-    for( var i = 0; i < quizQuestions.length; i++) {   
-        questionEl.textContent = quizQuestions[i].question;
-        AEl.textContent = quizQuestions[i].a;
-        BEl.textContent = quizQuestions[i].b;
-        CEl.textContent = quizQuestions[i].c;
-        DEl.textContent = quizQuestions[i].d;
-        var correctBtn = quizQuestions[i].correctAnswer;
-        var wrongBtn = quizQuestions[i].wrongAnswer;
-        quizEl.appendChild(questionEl);
-        quizEl.appendChild(answersEL);
-        answersEL.appendChild(AEl);
-        answersEL.appendChild(BEl);
-        answersEL.appendChild(CEl);
-        answersEL.appendChild(DEl);
+    // i = i + 1
+    console.log(i)
+    questionEl.textContent = quizQuestions[i].question;
+    console.log(quizQuestions[i].question)
+    AEl.textContent = quizQuestions[i].a;
+    BEl.textContent = quizQuestions[i].b;
+    CEl.textContent = quizQuestions[i].c;
+    DEl.textContent = quizQuestions[i].d;
+    var correctBtn = quizQuestions[i].correctAnswer;
+    console.log(correctBtn)
+    var wrongBtn = quizQuestions[i].wrongAnswer;
+    quizEl.appendChild(questionEl);
+    quizEl.appendChild(answersEL);
+    answersEL.appendChild(AEl);
+    answersEL.appendChild(BEl);
+    answersEL.appendChild(CEl);
+    answersEL.appendChild(DEl);
+    // Correct Button Clicked
+    correctBtn.addEventListener("click", function() {
+        console.log("correct");
+        console.log(quizQuestions[i].correctAnswer)
         
-        correctBtn.addEventListener("click", function() {
-            console.log("correct");
-        })
-        for(var j = 0; j < wrongBtn.length; j++) {
-            wrongBtn[j].addEventListener("click", function() {
-                console.log("wrong")
-            })
-        }
-        // break;
-    };
+        removeQuestion();
+        addQuestion(i = i + 1);
+        
+    });
+    
+    // Incorret Button Clicked
+    // wrongBtn[0].addEventListener("click", function() {
+    //     console.log("wrong")
+    //     removeQuestion();
+    //     addQuestion();
+        // timeLeft = timeLeft - 10;
+    // })
+
 
 };
-
+var removeQuestion = function () {
+    quizEl.removeChild(questionEl);
+    answersEL.removeChild(AEl);
+    answersEL.removeChild(BEl);
+    answersEL.removeChild(CEl);
+    answersEL.removeChild(DEl);
+}
 
 var removeInstructions = function() {
     instructionsEl.removeChild(instDivEl)
@@ -124,30 +160,8 @@ var removeInstructions = function() {
 startButtonEl.addEventListener("click", function() {
 startQuiz();
 quizTimer();
-removeInstructions()
+removeInstructions();
 addQuestion();
 }); 
 
 
-
-
-
-
-
-
-        // if (true) {
-        //     correctBtn.addEventListener("click", function() {
-        //     console.log("The correct button was clicked");
-        //     quizEl.removeChild(questionEl);
-        //     quizEl.removeChild(answersEL);
-        //     });
-        // };
-
-
-        //     if (true) {
-        //         wrongBtn[j].addEventListener("click", function() {
-        //         console.log("Wrong Answer");
-        //         // alert("Incorrect.");
-        //         });
-        //     };  
-        // };
